@@ -1,0 +1,2 @@
+model_checkpoint_path: "vgg3_gradient.chkpt"
+all_model_checkpoint_paths: "vgg3_gradient.chkpt"

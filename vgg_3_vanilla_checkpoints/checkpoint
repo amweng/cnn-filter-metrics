@@ -1,0 +1,2 @@
+model_checkpoint_path: "vgg3_vanilla.chkpt"
+all_model_checkpoint_paths: "vgg3_vanilla.chkpt"
