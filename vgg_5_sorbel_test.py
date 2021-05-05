@@ -46,7 +46,7 @@ testY = to_categorical(testY)
 
 
 # define cnn model
-def define_model_VGG8():
+def define_model_VGG5():
 	model = Sequential()
 	model.add(Conv2D(32, (3, 3), activation='relu', kernel_initializer='he_uniform', padding='same', input_shape=(32, 32, 3)))
 	model.add(MaxPooling2D((2, 2)))
@@ -86,14 +86,14 @@ def summarize_diagnostics(history):
 def run_test_harness(trainX,testX,trainY,testY):
 
 	from keras.callbacks import ModelCheckpoint, EarlyStopping
-	checkpoint = ModelCheckpoint("/Users/andrewweng/developer/cnn-filter-metrics/vgg_5_sobel2_checkpoints/vgg5_sobel2.chkpt", monitor='val_accuracy', verbose=1, save_best_only=True, save_weights_only=True, mode='auto', save_freq='epoch')
+	checkpoint = ModelCheckpoint("/Users/andrewweng/developer/cnn-filter-metrics/vgg_5_sobel_demo_checkpoints/vgg5_sobel_demo.chkpt", monitor='val_accuracy', verbose=1, save_best_only=True, save_weights_only=True, mode='auto', save_freq='epoch')
 	early = EarlyStopping(monitor='val_accuracy', min_delta=0, patience=20, verbose=1, mode='auto')
 	# load dataset
 	# trainX, trainY, testX, testY = load_dataset()
 	# prepare pixel data
 	# trainX, testX = prep_pixels(trainX, testX)
 	# define model
-	model = define_model_VGG8()
+	model = define_model_VGG5()
 	# fit model
 	history = model.fit(trainX, trainY, epochs=100, batch_size=64, validation_data=(testX, testY), verbose=1, callbacks=[checkpoint,early])
 	# evaluate model
@@ -104,4 +104,4 @@ def run_test_harness(trainX,testX,trainY,testY):
  
 # entry point, run the test harness
 history = run_test_harness(trainX,testX,trainY,testY)
-summarize_diagnostics(history,'vgg5_sobel2')
+summarize_diagnostics(history,'vgg5_sobel_demo')
